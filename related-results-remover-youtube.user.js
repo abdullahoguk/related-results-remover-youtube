@@ -17,26 +17,38 @@
 
 (function() {
     'use strict';
-window.addEventListener('load', main, false);
-
-function main(){
-
-//Remove related video in new UI
-[...document.querySelectorAll("ytd-badge-supported-renderer")]
-    .filter(function(e){return /Related|İlgili video/.test(e.innerText)})
-    .forEach(function(e){e.closest("#dismissable").remove()});
-
-//Remove related video in old UI
-[...document.querySelectorAll(".yt-badge")]
-    .filter(function(e){return /Related|İlgili video/.test(e.innerText)})
-    .forEach(function(e){e.closest("li").remove()});
-
-//Remove Search Suggestions
-var suggestions = document.querySelector("div.search-refinements");
-if(suggestions){suggestions.remove()};
-
- };
-
-
-
+    //to track changes on DOM for new UI(SPA) 
+    var mutationObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          main();
+        });
+      });
+      
+      mutationObserver.observe(document.body, {
+        attributes: true,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: true,
+        characterDataOldValue: true
+      });
+      
+      function main(){
+      
+      //Remove related video in new UI
+      [...document.querySelectorAll("ytd-badge-supported-renderer")]
+          .filter(function(e){return /Related|İlgili video/.test(e.innerText)})
+          .forEach(function(e){e.closest("#dismissable").remove()});
+      
+      //Remove related video in old UI
+      [...document.querySelectorAll(".yt-badge")]
+          .filter(function(e){return /Related|İlgili video/.test(e.innerText)})
+          .forEach(function(e){e.closest("li").remove()});
+      
+      //Remove Search Suggestions
+      var suggestions = document.querySelector("div.search-refinements");
+      if(suggestions){suggestions.remove()};
+      
+       };
+      
 })();
