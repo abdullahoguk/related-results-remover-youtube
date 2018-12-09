@@ -4,6 +4,7 @@
 // @version      0.1
 // @description  Remove related videos and search suggestions in youtube search results.
 // @author       Abdullah Öğük
+// @license https://creativecommons.org/licenses/by-sa/4.0/
 // @match        *.youtube.com/results?search_query=*
 // @include      *youtube.com/results?search_query=*
 // @include      *.youtube.com/results?search_query=*
