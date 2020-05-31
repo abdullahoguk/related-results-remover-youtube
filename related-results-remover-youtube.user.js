@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         Cleanup Youtube Search results
 // @namespace    https:/github.com/abdullahoguk/related-results-remover-youtube
-// @version      0.1
+// @version      0.6
 // @description  Remove related videos and search suggestions in youtube search results.
 // @author       Abdullah Öğük
 // @license CC-BY-SA-3.0; http://creativecommons.org/licenses/by-sa/3.0/
 // @license MIT
-// @match        *.youtube.com/results?search_query=*
-// @include      *youtube.com/results?search_query=*
-// @include      *.youtube.com/results?search_query=*
+// @match        *.youtube.com/results*
+// @include      *youtube.com/results*
+// @include      *.youtube.com/results*
 // @run-at document-end
 
 
@@ -17,7 +17,7 @@
 
 (function() {
     'use strict';
-    //to track changes on DOM for new UI(SPA) 
+  //to track changes on DOM for new UI(SPA) 
     var mutationObserver = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
           main();
@@ -47,8 +47,13 @@
       
       //Remove Search Suggestions
       var suggestions = document.querySelector("div.search-refinements");
-      if(suggestions){suggestions.remove()};
-      
-       };
+      if(suggestions){suggestions.remove();}
+
+      //Remove new class
+      var dismissable = document.querySelector("div.feed-item-dismissable");
+      if(dismissable){dismissable.remove();}
+      var dismissable2 = document.querySelector("ytd-shelf-renderer #dismissable");
+      if(dismissable2){dismissable2.remove();}
+      }
       
 })();
